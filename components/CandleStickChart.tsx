@@ -16,7 +16,6 @@ const CandleStickChart = ({
   const chartContainerRef = useRef<HTMLDivElement | null>(null);
   const chartRef = useRef<IChartApi | null>(null);
   const candleSeriesRef = useRef<ISeriesApi<'Candlestick'> | null>(null);
-  const [loading, setLoading] = useState(false);
   const [period, setPeriod] = useState(initialPeriod);
   const [ohlcv, setOhlcv] = useState<OHLCData[]>(data ?? []);
   const [isPending, startTransition] = useTransition();
@@ -33,8 +32,6 @@ const CandleStickChart = ({
       setOhlcv(newData ?? []);
     } catch (error) {
       console.error('Failed to fetch OHLCV data', error);
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -98,7 +95,7 @@ const CandleStickChart = ({
               key={value}
               className={period === value ? 'config-button-active' : 'config-button'}
               onClick={() => handlePeriodChange(value)}
-              disabled={loading}
+              disabled={isPending}
             >
               {label}
             </button>
