@@ -53,7 +53,11 @@ const CandleStickChart = ({
       width: container.clientWidth,
     });
     const series = chart.addSeries(CandlestickSeries, getCandlestickConfig());
-    series.setData(convertOHLCData(ohlcv));
+
+    const convertedToSeconds = ohlcv.map(
+      (d) => [Math.floor(d[0] / 1000), d[1], d[2], d[3], d[4]] as OHLCData,
+    );
+    series.setData(convertOHLCData(convertedToSeconds));
     chart.timeScale().fitContent();
 
     chartRef.current = chart;
@@ -72,7 +76,7 @@ const CandleStickChart = ({
       chartRef.current = null;
       candleSeriesRef.current = null;
     };
-  }, [height]);
+  }, [height, period]);
 
   useEffect(() => {
     if (!candleSeriesRef.current) return;
