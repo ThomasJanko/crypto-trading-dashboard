@@ -44,7 +44,7 @@ const DataTable = <T,>({
           <TableRow
             key={rowKey(row, index)}
             className={cn(
-              'overflow-hidden rounded-lg border-b border-purple-100/5 hover:bg-dark-400/30! relative',
+              'overflow-hidden rounded-lg border-b border-purple-100/50 hover:bg-dark-400/30! relative',
               bodyRowClassName,
             )}
           >

@@ -37,7 +37,7 @@ const TrendingCoins = async () => {
         const isTrendingUp = item.data.price_change_percentage_24h.usd > 0;
         return (
           <div className={cn('price-change', isTrendingUp ? 'text-green-500' : 'text-red-500')}>
-            <p>
+            <div>
               {isTrendingUp ? (
                 <div className="flex flex-col items-center">
                   <TrendingUp width={16} height={16} />
@@ -49,7 +49,7 @@ const TrendingCoins = async () => {
                   <p>{item.data.price_change_percentage_24h.usd.toFixed(2)}%</p>
                 </div>
               )}
-            </p>
+            </div>
           </div>
         );
       },
