@@ -30,6 +30,16 @@ export function formatCurrency(
   });
 }
 
+export function formatPrice(price: number | null | undefined): string {
+  if (price === null || price === undefined || isNaN(price)) {
+    return '$0.00';
+  }
+  return price.toLocaleString(undefined, {
+    style: 'currency',
+    currency: 'USD',
+  });
+}
+
 export function formatPercentage(change: number | null | undefined): string {
   if (change === null || change === undefined || isNaN(change)) {
     return '0.0%';
