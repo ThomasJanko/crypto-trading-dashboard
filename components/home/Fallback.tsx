@@ -72,7 +72,82 @@ const TrendingCoinsOverviewFallback = () => {
   );
 };
 
+type CategoryRow = {
+  id: string;
+};
+
+const categoriesFallbackData: CategoryRow[] = Array.from({ length: 10 }, (_, index) => ({
+  id: `category-fallback-${index}`,
+}));
+
+const renderCategoryNameSkeleton = () => <div className="skeleton category-skeleton" />;
+
+const renderTopGainersSkeleton = () => (
+  <div className="top-gainers-cell">
+    <div className="skeleton coin-skeleton" />
+    <div className="skeleton coin-skeleton" />
+    <div className="skeleton coin-skeleton" />
+  </div>
+);
+
+const renderCategoryChangeSkeleton = () => (
+  <div className="change-cell">
+    <div className="skeleton change-icon" />
+    <div className="skeleton value-skeleton-sm" />
+  </div>
+);
+
+const renderMarketCapSkeleton = () => <div className="skeleton value-skeleton-lg" />;
+
+const renderVolumeSkeleton = () => <div className="skeleton value-skeleton-md" />;
+
+const categoriesFallbackColumns: DataTableColumn<CategoryRow>[] = [
+  {
+    header: 'Category',
+    cell: renderCategoryNameSkeleton,
+    cellClassName: 'category-cell',
+  },
+  {
+    header: 'Top Gainers',
+    cell: renderTopGainersSkeleton,
+    cellClassName: 'top-gainers-cell',
+  },
+  {
+    header: '24h Change',
+    cell: renderCategoryChangeSkeleton,
+    cellClassName: 'change-header-cell',
+  },
+  {
+    header: 'Market Cap',
+    cell: renderMarketCapSkeleton,
+    cellClassName: 'market-cap-cell',
+  },
+  {
+    header: '24h Volume',
+    cell: renderVolumeSkeleton,
+    cellClassName: 'volume-cell',
+  },
+];
+
+const CategoriesFallback = () => {
+  return (
+    <div id="categories-fallback">
+      <h4>Top Categories</h4>
+      <DataTable
+        columns={categoriesFallbackColumns}
+        data={categoriesFallbackData}
+        rowKey={(row) => row.id}
+      />
+    </div>
+  );
+};
+
 // Backward-compatible alias for requested naming.
 const CoinOverViewFallback = CoinOverviewFallback;
 
-export { CoinOverviewFallback, CoinOverViewFallback, TrendingCoinsOverviewFallback };
+export {
+  CategoriesFallback,
+  CoinOverviewFallback,
+  CoinOverViewFallback,
+  TrendingCoinsOverviewFallback,
+};
